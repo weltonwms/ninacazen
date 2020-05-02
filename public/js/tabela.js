@@ -11,11 +11,13 @@ var languageDatatable = {
     "sZeroRecords": "Nenhum registro encontrado",
     "sSearch": "<i class='fa fa-search' aria-hidden='true'></i> Pesquisar",
     "oPaginate": {
-        "sNext": "Próximo",
-        "sPrevious": "Anterior",
+        "sNext": "<i class='fa fa-forward' aria-hidden='true'></i>",
+        "sPrevious": "<i class='fa fa-backward' aria-hidden='true'></i>",
         "sFirst": "Primeiro",
         "sLast": "Último"
     },
+    "decimal": ",",
+    "thousands": ".",
     "oAria": {
         "sSortAscending": ": Ordenar colunas de forma ascendente",
         "sSortDescending": ": Ordenar colunas de forma descendente"
@@ -39,7 +41,8 @@ var Tabela = (function () {
             //console.log('vou setar o colId');
             colId = params.colId;
         }
-        var table = $('#dataTable1').DataTable({
+
+        var config= {
             language: languageDatatable,
             "bStateSave": true,
             select: {
@@ -68,7 +71,27 @@ var Tabela = (function () {
             ],
             order: [2, 'asc']
 
-        });
+        }; //fim configuração 1
+        var config2= {
+            language: languageDatatable,
+            "bStateSave": true,
+            select: {
+                style: 'multi',
+                selector: '.select-checkbox',
+                items: 'row',
+            },
+            columnDefs: [
+            {
+                targets: 0,
+                className: 'select-checkbox',
+                orderable: false
+            }
+            ],
+            order: [colId, 'desc']
+
+        };
+        var xConfig= (params && params.responsive===true)?config:config2;
+        var table = $('#dataTable1').DataTable(xConfig);
         return table;
     }
 
@@ -153,4 +176,19 @@ function dataTableSubmit(event) {
 
 
 }
+
+$(".checkall").change(function(){
+    var t= Tabela.getInstance();
+    if(!t){
+        console.log('nenhuma instância de DataTable');
+        return false;
+    }
+    var check= $(this).is(":checked");
+    if(check){
+        t.rows({page:'current'}).select();
+    }
+    else{
+        t.rows({page:'current'}).deselect();
+    }
+});
 

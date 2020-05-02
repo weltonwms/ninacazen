@@ -18,10 +18,10 @@
 
     <div class="col-lg-6">
         {{-- Usando o componentede Form bsText: forma mais curta que component blade FormGroup --}}
-        {{ Form::bsText('cep',null,['label'=>"CEP"]) }}
+        {{ Form::bsText('cep',null,['label'=>"CEP",'class'=>"cep"]) }}
 
         {{ Form::bsText('endereco',null,['label'=>"Endereço"]) }}
         
-        {{ Form::bsText('cpf',NULL, ['label'=>"CPF"]) }}
+        {{ Form::bsText('cpf',NULL, ['label'=>"CPF", 'class'=>"cpf"]) }}
     </div>
 </div>

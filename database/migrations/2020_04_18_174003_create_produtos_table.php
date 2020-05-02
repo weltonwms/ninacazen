@@ -19,7 +19,7 @@ class CreateProdutosTable extends Migration
             $table->string('observacao')->nullable();
 	        $table->decimal('valor_aluguel', 10, 2);
             $table->integer('qtd_estoque')->unsigned();
-            $table->integer('qtd_disponivel')->unsigned();
+            $table->integer('qtd_disponivel')->unsigned()->nullable();
             $table->timestamps();
         });
     }

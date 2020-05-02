@@ -3,7 +3,13 @@
 <div class="app-title">
     <div>
         @if(isset($title))
-        <h1><i class="fa fa-users"></i> {{$title}}</h1>
+        <h1>    
+            @if(isset($icon))
+            <i class="fa {{$icon}}"></i>
+            @endif
+            {{$title}}
+        
+        </h1>
         @endif
         @if(isset($subtitle))
         <p>{{$subtitle}}</p>

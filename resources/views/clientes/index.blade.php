@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('breadcrumb')
-    @breadcrumbs(['title'=>'Clientes', 'route'=>route('clientes.index'),'subtitle'=>'Gerenciamento de Clientes'])
+    @breadcrumbs(['title'=>'Clientes', 'icon'=>'fa-users', 'route'=>route('clientes.index'),'subtitle'=>'Gerenciamento de Clientes'])
 
     @endbreadcrumbs
 @endsection
@@ -19,7 +19,7 @@
 <thead>
     <tr>
         <th></th>
-        <th></th>
+        <th><input class="checkall" type="checkbox"></th>
         <th>Nome</th>
         <th>Email</th>
         <th>Telefone</th>
@@ -54,7 +54,7 @@
      * **********************************
      */
 $(document).ready(function() {
-    Tabela.getInstance({colId:7}); //instanciando dataTable e informando a coluna do id
+    Tabela.getInstance({colId:7,responsive:true}); //instanciando dataTable e informando a coluna do id
 });
    //fim start Datatable//
 </script>

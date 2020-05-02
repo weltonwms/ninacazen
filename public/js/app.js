@@ -19,9 +19,16 @@ var SPMaskBehavior = function (val) {
       }
   };
 
+function adminFormSubmit(event) {
+    var form = document.getElementById("adminForm");
+    form.submit();
+}
+
 $(document).ready(function () {
     $('.cep').mask('00000-000');
     $('.cpf').mask('000.000.000-00', { reverse: true });
     $('.phone').mask(SPMaskBehavior, spOptions);
+    $('.money').mask('000.000.000.000.000,00', {reverse: true});
+
 });
 

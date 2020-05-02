@@ -22,5 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('clientes', 'ClienteController');
     Route::delete('/clientes_bath','ClienteController@destroyBath' )->name('clientes_bath.destroy');
+    Route::resource('produtos', 'ProdutoController');
+    Route::delete('/produtos_bath','ProdutoController@destroyBath' )->name('produtos_bath.destroy');
    
 });

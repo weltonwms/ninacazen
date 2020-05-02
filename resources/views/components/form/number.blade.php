@@ -17,10 +17,9 @@ endif;
 
 ?>
 <div class="form-group {{$class_erro}} ">
-    {{ Form::label($name, $label, ['class' => "control-label"]) }}
-    {{ Form::text($name, $value, array_merge(['class' => "form-control $classes"], $attributes)) }}
+    {{ Form::label($name, $label, ['class' => 'control-label']) }}
+    {{ Form::number($name, $value, array_merge(['class' => "form-control $classes"], $attributes)) }}
     @if($class_erro)
     <div class='invalid-feedback'> {{$errors->first($name)}}</div>
     @endif
 </div>
-

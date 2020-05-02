@@ -4,11 +4,17 @@
     <div class="col-md-12">
         <div class="tile">
             <div class="tile-body">
-
+                @if(isset($bsResponsive))
+                <div class="table-responsive">
+                @endif
 
                 <table class="table table-hover table-bordered nowrap" id="dataTable1">
                     {{ $slot }}
                 </table>
+                @if(isset($bsResponsive))
+                </div>
+                @endif
+
                 <!--dependencia dataTableSubmit-->
                 <form id="adminForm" action="" method="POST" style="display: none;">
                     @csrf

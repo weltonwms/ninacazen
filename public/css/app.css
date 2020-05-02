@@ -4,6 +4,17 @@
     input[type="week"], input[type="number"], input[type="email"],
     input[type="url"]{ font-size: 16px; } */
 
+    @media (max-width: 480px) {
+  
+      .page-link {
+      
+        padding: 0.5rem 0.6rem;
+        
+    }
+      
+    }
+    
+
 .has-danger input.form-control{
     border-color: #dc3545;
 /*    padding-right: calc(1.5em + 0.75rem);
