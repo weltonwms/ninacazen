@@ -32,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.formgroup', 'formgroup');
         \Form::component('bsText', 'components.form.text', ['name', 'value' => null, 'attributes' => []]);
         \Form::component('bsNumber', 'components.form.number', ['name', 'value' => null, 'attributes' => []]);
+        \Form::component('bsPassword', 'components.form.password', ['name',  'attributes' => []]);
     }
 }
