@@ -20,8 +20,14 @@ var SPMaskBehavior = function (val) {
   };
 
 function adminFormSubmit(event) {
+    event.preventDefault();
+    var btn= event.target;
+
     var form = document.getElementById("adminForm");
     form.submit();
+    $(btn).attr('disabled','disabled');
+    $(btn).removeAttr('onclick');
+    $(btn).unbind();
 }
 
 $(document).ready(function () {

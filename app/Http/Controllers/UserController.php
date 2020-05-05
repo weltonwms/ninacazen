@@ -5,9 +5,31 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserSecurityRequest;
+
 
 class UserController extends Controller
 {
+
+
+    public function showChangePassword()
+    {
+        return view('users.change-password');
+    }
+
+    public function updatePassword(UserSecurityRequest $request)
+    {
+
+        $user = \Auth::user();
+        $new_password = $request->input('password');
+        $user->password = \Hash::make($new_password);
+        $user->save();
+        \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('Senha Alterada com Sucesso!')]);
+        return back();
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
