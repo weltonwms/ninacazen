@@ -25,6 +25,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('produtos', 'ProdutoController');
     Route::delete('/produtos_bath','ProdutoController@destroyBath' )->name('produtos_bath.destroy');
     
+    Route::resource('rents', 'RentController');
+    Route::delete('/rents_bath','RentController@destroyBath' )->name('rents_bath.destroy');
+    
+    
     Route::get('users/changePassword','UserController@showChangePassword')->name('users.change');
     Route::post('users/changePassword','UserController@updatePassword')->name('users.updatePass');
     Route::resource('users', 'UserController');

@@ -123,7 +123,7 @@ var Tabela = (function () {
 })();
 
 
-/**
+/*
  * *********************************
  * Functions for toolbar actions in datatables
  * **********************************
