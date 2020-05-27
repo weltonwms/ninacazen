@@ -15,9 +15,10 @@ class CreateProdutosTable extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('descricao');
-            $table->string('observacao')->nullable();
-	        $table->decimal('valor_aluguel', 10, 2);
+            $table->string('nome');
+            $table->string('descricao')->nullable();
+	    $table->decimal('valor_aluguel', 10, 2);
+            $table->decimal('valor_venda', 10, 2);
             $table->integer('qtd_estoque')->unsigned();
             $table->integer('qtd_disponivel')->unsigned()->nullable();
             $table->timestamps();

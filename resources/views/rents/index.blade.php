@@ -15,7 +15,7 @@
 @endsection
 
 @section('content')
-    @datatables(['bsResponsive'=>true])
+    @datatables
 <thead>
     <tr>
         <th><input class="checkall" type="checkbox"></th>

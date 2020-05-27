@@ -14,7 +14,9 @@
     </div>
 </div>
 {{ Form::hidden('produtos_json',null,['class'=>"form-control", 'id'=>'produtos_json']) }}
-
+@error('produtos_json')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
 
 
 <div class="row">
@@ -35,8 +37,8 @@
             <tr>
                 <th>#</th>
                 <th>Produto</th>
-                <th>Valor</th>
-                <th>Qtd</th>
+                 <th>Qtd</th>
+                <th>Valor Un</th>
                 <th>Total</th>
                 <th><i class="fa fa-edit"></i></th>
                 <th><i class="fa fa-trash"></i></th>
@@ -58,7 +60,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TituloModalFormProduto">Produto</h5>
+                <h5 class="modal-title" id="TituloModalFormProduto">Produto para Alugar</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -73,7 +75,7 @@
                                 <option value="">--Selecione--</option>
                                 <?php foreach ($produtos as $produto): ?>
                                     <option value="<?php echo $produto->id ?>" data-obj="<?php echo base64_encode(json_encode($produto)) ?>">
-                                        <?php echo $produto->descricao ?>
+                                        <?php echo $produto->nome ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -83,7 +85,7 @@
                             <input type="text" class="form-control" id="formProduto_qtd">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="formProduto_valor" class="col-form-label">Valor Aluguel:</label>
+                            <label for="formProduto_valor" class="col-form-label">Valor Un. Aluguel:</label>
                             <input type="text" class="form-control" id="formProduto_valor_aluguel">
                         </div>
                         <div class="form-group col-md-4">
@@ -174,9 +176,9 @@
                 var product=getObjProduct(item.produto_id);
                 return "<tr>" +
                         "<td>" + (i + 1) + "</td>" +
-                        "<td>" + product.descricao + "</td>" +
-                        "<td>" + item.valor_aluguel + "</td>" +
+                        "<td>" + product.nome + "</td>" +
                         "<td>" + item.qtd + "</td>" +
+                        "<td>" + item.valor_aluguel + "</td>" +
                         "<td>" + item.qtd + "</td>" +
                         '<td><a href="#" editProduct="' + i + '"> <i class="fa fa-edit"></i>  </a></td>' +
                         '<td><a href="#" deleteProduct="' + i + '"> <i class="fa fa-trash text-danger"></i>  </a></td>' +

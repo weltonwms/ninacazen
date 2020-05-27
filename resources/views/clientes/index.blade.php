@@ -18,7 +18,6 @@
 @datatables
 <thead>
     <tr>
-        <th></th>
         <th><input class="checkall" type="checkbox"></th>
         <th>Nome</th>
         <th>Email</th>
@@ -32,7 +31,6 @@
 <tbody>
    @foreach($clientes as $cliente)
     <tr>
-        <td></td>
         <td></td>
         <td><a href="{{route('clientes.edit', $cliente->id)}}">{{$cliente->nome}}</a></td>
         <td>{{$cliente->email}}</td>
@@ -49,12 +47,12 @@
 @push('scripts')
 
 <script>
-    /**
+    /*
      * First start on Table
      * **********************************
      */
 $(document).ready(function() {
-    Tabela.getInstance({colId:7,responsive:true}); //instanciando dataTable e informando a coluna do id
+    Tabela.getInstance({colId:6}); //instanciando dataTable e informando a coluna do id
 });
    //fim start Datatable//
 </script>

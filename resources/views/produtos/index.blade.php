@@ -15,15 +15,16 @@
 @endsection
 
 @section('content')
-@datatables(['bsResponsive'=>true])
+@datatables
 <thead>
     <tr>
         <th><input class="checkall" type="checkbox"></th>
         <th>Nome</th>
         <th>Valor Aluguel</th>
+        <th>Valor Venda</th>
         <th>Qtd Estoque</th>
         <th>Qtd Disponível</th>
-        <th>Observação</th>
+        <th>Descrição</th>
         <th>ID</th>
     </tr>
 </thead>
@@ -33,11 +34,12 @@
     <tr>
        
         <td></td>
-        <td><a href="{{route('produtos.edit', $produto->id)}}">{{$produto->descricao}}</a></td>
+        <td><a href="{{route('produtos.edit', $produto->id)}}">{{$produto->nome}}</a></td>
         <td>{{$produto->formated_valor_aluguel}}</td>
+        <td>{{$produto->formated_valor_venda}}</td>
         <td>{{$produto->qtd_estoque}}</td>
         <td>{{$produto->qtd_estoque}}</td>
-        <td>{{$produto->observacao}}</td>
+        <td>{{$produto->descricao}}</td>
         <td>{{$produto->id}}</td>
     </tr>
     @endforeach
@@ -53,7 +55,7 @@
      * **********************************
      */
 $(document).ready(function() {
-    Tabela.getInstance({colId:6}); //instanciando dataTable e informando a coluna do id
+    Tabela.getInstance({colId:7}); //instanciando dataTable e informando a coluna do id
 });
    //fim start Datatable//
 </script>

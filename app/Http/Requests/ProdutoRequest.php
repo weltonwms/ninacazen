@@ -24,8 +24,9 @@ class ProdutoRequest extends FormRequest
     public function rules()
     {
         return [
-            'descricao'=>"required",
+            'nome'=>"required",
             'valor_aluguel'=>"required",
+            'valor_venda'=>"required",
             'qtd_estoque'=>"required|numeric"
         ];
     }

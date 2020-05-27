@@ -41,38 +41,10 @@ var Tabela = (function () {
             //console.log('vou setar o colId');
             colId = params.colId;
         }
-
+        else{
+            colId=1;
+        }
         var config= {
-            language: languageDatatable,
-            "bStateSave": true,
-            select: {
-                style: 'multi',
-                selector: '.select-checkbox',
-                items: 'row',
-            },
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: 0
-                }
-            },
-            columnDefs: [{
-                targets: 0,
-                className: 'control'
-            },
-            {
-                targets: 1,
-                className: 'select-checkbox'
-            },
-            {
-                targets: [0, 1],
-                orderable: false
-            }
-            ],
-            order: [2, 'asc']
-
-        }; //fim configuração 1
-        var config2= {
             language: languageDatatable,
             "bStateSave": true,
             select: {
@@ -90,8 +62,8 @@ var Tabela = (function () {
             order: [colId, 'desc']
 
         };
-        var xConfig= (params && params.responsive===true)?config:config2;
-        var table = $('#dataTable1').DataTable(xConfig);
+        
+        var table = $('#dataTable1').DataTable(config);
         return table;
     }
 
@@ -104,13 +76,12 @@ var Tabela = (function () {
             return instance;
         },
         getSelectedTable: function () {
-            console.log('colId ', colId);
             if (!instance)
             {
                 console.log('nenhuma instância criada ainda');
                 return false;
             }
-            var targetId = colId || 2; //default id is second column
+            var targetId = colId || 1; //default id is second column
             var dt = instance.rows({ selected: true }).data();
             var ids = [];
             dt.each(function (el) {

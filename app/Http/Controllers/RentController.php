@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rent;
 use Illuminate\Http\Request;
+use App\Http\Requests\RentRequest;
 
 class RentController extends Controller
 {
@@ -38,7 +39,7 @@ class RentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RentRequest $request)
     {
          $rent= Rent::create($request->all());
          $this->saveProdutos($rent, $request);
@@ -80,7 +81,7 @@ class RentController extends Controller
      * @param  \App\Rent  $rent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rent $rent)
+    public function update(RentRequest $request, Rent $rent)
     {
         
          $rent->update($request->all());
