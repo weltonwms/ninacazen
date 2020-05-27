@@ -56,6 +56,7 @@
   <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('template/js/main.js') }}"></script>
   <script src="{{ asset('template/js/plugins/bootstrap-notify.min.js') }}"></script>
+   <script src="{{ asset('template/js/plugins/moment.min.js') }}"></script>
    <script src="{{ asset('template/js/plugins/sweetalert.min.js') }}"></script>
    <script src="{{ asset('template/js/plugins/jquery.mask.min.js') }}"></script>
   <!-- The javascript plugin to display page loading on top-->

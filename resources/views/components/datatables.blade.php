@@ -28,6 +28,7 @@
 @push('scripts')
 <script type="text/javascript" src="{{ asset('template/js/plugins/jquery.dataTables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('template/js/plugins/dataTables.bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('template/js/plugins/datetime-moment.js') }}"></script>
 <!--responsive datatables e datatables selecionavel-->
 <!--<script type="text/javascript" src="{{ asset('template/js/plugins/dataTables.responsive.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('template/js/plugins/responsive.bootstrap.min.js') }}"></script>-->
