@@ -30,3 +30,7 @@
   background-size: 45px;
   background-position: right;
 }
+
+#total_geral_tabela{
+    font-weight: bold;
+}
