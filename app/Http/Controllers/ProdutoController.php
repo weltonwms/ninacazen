@@ -37,7 +37,9 @@ class ProdutoController extends Controller
      */
     public function store(ProdutoRequest $request)
     {
-        Produto::create($request->all());
+        $produto=Produto::create($request->all());
+        $produto->qtd_disponivel=$produto->qtd_estoque;
+        $produto->save();
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionCreate')]);
         return redirect('produtos');
     }
@@ -74,6 +76,7 @@ class ProdutoController extends Controller
     public function update(ProdutoRequest $request, Produto $produto)
     {
         $produto->update($request->all());
+        $produto->updateQtdDisponivel();
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionUpdate')]);
         return redirect()->route('produtos.index');
     }

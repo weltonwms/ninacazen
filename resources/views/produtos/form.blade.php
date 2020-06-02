@@ -3,7 +3,7 @@
 
 {{ Form::bsText('valor_aluguel',null,['label'=>"Valor Aluguel *", 'class'=>"money"]) }}
 {{ Form::bsText('valor_venda',null,['label'=>"Valor Venda *", 'class'=>"money"]) }}
-{{ Form::bsNumber('qtd_estoque',null,['label'=>"Qtd Estoque *"]) }}
+{{ Form::bsNumber('qtd_estoque',null,['label'=>"Qtd Estoque *",'min'=>'0']) }}
 {{ Form::bsText('descricao',null,['label'=>"Descrição"]) }}
 
 

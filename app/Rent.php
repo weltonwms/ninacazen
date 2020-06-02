@@ -16,6 +16,7 @@ class Rent extends Model
     public function produtos()
     {
         return $this->belongsToMany('App\Produto')
+                ->using('App\ProdutoRent')
                 ->withPivot('qtd', 'valor_aluguel','devolvido')
                 ->withTimestamps();
     }

@@ -99,9 +99,11 @@ class RentController extends Controller
      */
     public function destroy(Rent $rent)
     {
+        $produtos=$rent->produtos;
         //$retorno = $rent->verifyAndDelete();
        $retorno = $rent->delete();
        if ($retorno):
+        \App\Helpers\ProdutoHelper::updateQtdDisponivelByProdutos($produtos);
            \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionDelete')]);
        endif;
 
@@ -110,9 +112,11 @@ class RentController extends Controller
     
     public function destroyBath()
     {
+     $produtos= \App\Helpers\ProdutoHelper::getProdutosByRentsIds(request('ids'));
      $retorno= Rent::destroy(request('ids'));
      if ($retorno):
-            \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionDelete', $retorno)]);
+        \App\Helpers\ProdutoHelper::updateQtdDisponivelByProdutos($produtos);
+        \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionDelete', $retorno)]);
         endif;
 
         return redirect()->route('rents.index');

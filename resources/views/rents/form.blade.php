@@ -91,11 +91,11 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="formProduto_qtd" class="col-form-label">Qtd:</label>
-                            <input type="number" class="form-control" id="formProduto_qtd">
+                            <input type="number" min="0" class="form-control" id="formProduto_qtd">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="formProduto_valor" class="col-form-label">Valor Un. Aluguel:</label>
-                            <input type="text" class="form-control money" id="formProduto_valor_aluguel">
+                            <input type="text"  class="form-control money" id="formProduto_valor_aluguel">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="formProduto_total" class="col-form-label">Total:</label>
@@ -276,16 +276,46 @@
         var valor = $(campo).val().replace('.', '').replace(',', '.');
         return parseFloat(valor);
     }
+
+    function checkErrors(){
+        var qtd= ler_valor("#formProduto_qtd");
+        var valor_aluguel= ler_valor("#formProduto_valor_aluguel");
+        var produto_id= $("#formProduto_produto_id").val();
+        var errors=[];
+        if(!produto_id){
+            errors.push("Produto não Selecionado");
+            return errors; // Não tem como prosseguir sem produto_id
+        }
+        var produto = getObjProduct(produto_id);
+        if(!qtd || qtd < 1){
+            errors.push("Quantidade Inválida");
+        }
+        if(!valor_aluguel){
+            errors.push("Valor de Aluguel não Inserido");
+        }
+        
+        if(qtd > produto.qtd_disponivel){
+            errors.push("Qtd maior que Quantidade Disponível");
+        }
+        return errors;
+    }
     
     
 
     var obj = Produtos();
     obj.inicializeItems();
     $("#btn_save_item").click(function () {
-        obj.saveItem();
-        obj.resetFormProduto();
-        obj.updateTableProduto();
-        console.log(obj.getItems());
+        var errors=checkErrors();
+        if(errors.length===0){
+            obj.saveItem();
+            obj.resetFormProduto();
+            obj.updateTableProduto();
+            console.log(obj.getItems());
+        }
+        else{
+            alert(errors.join('\n'));
+        }
+        
     });
 
     $('#ModalFormProduto').on('hidden.bs.modal', function (e) {
@@ -294,6 +324,7 @@
 
     $('#formProduto_produto_id').change(function (e) {
         var produto = getObjProduct(this.value);
+        console.log(produto);
         $("#formProduto_valor_aluguel").val(valorFormatado(produto.valor_aluguel));
         calculoTotal();
     });

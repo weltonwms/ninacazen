@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade; //add para facilitar componente blade
 
+use App\Observers\ProdutoRentObserver; //usado para eventos em ProdutoRent
+use App\ProdutoRent;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +38,6 @@ class AppServiceProvider extends ServiceProvider
         \Form::component('bsDate', 'components.form.date', ['name', 'value' => null, 'attributes' => []]);
         \Form::component('bsPassword', 'components.form.password', ['name',  'attributes' => []]);
         \Form::component('bsSelect', 'components.form.select', ['name', 'list'=>[],'value'=>null, 'attributes' => []]);
-        
+        ProdutoRent::observe(ProdutoRentObserver::class);
     }
 }

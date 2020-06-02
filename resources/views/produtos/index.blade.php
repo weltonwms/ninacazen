@@ -38,7 +38,7 @@
         <td>{{$produto->formated_valor_aluguel}}</td>
         <td>{{$produto->formated_valor_venda}}</td>
         <td>{{$produto->qtd_estoque}}</td>
-        <td>{{$produto->qtd_estoque}}</td>
+        <td>{{$produto->qtd_disponivel}}</td>
         <td>{{$produto->descricao}}</td>
         <td>{{$produto->id}}</td>
     </tr>
