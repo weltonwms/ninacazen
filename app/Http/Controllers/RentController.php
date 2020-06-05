@@ -137,4 +137,9 @@ class RentController extends Controller
         $rent->produtos()->sync($dados);
         
     }
+
+    public function print(Rent $rent){
+       
+        return view('rents.print', compact('rent'));
+    }
 }

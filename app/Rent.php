@@ -92,4 +92,16 @@ class Rent extends Model
          return json_encode($list);
          //return '[{"produto_id":"5","qtd":"37","valor_aluguel":"10.00"},{"produto_id":"4","qtd":"30","valor_aluguel":"1.00"}]';
     }
+
+    public function getTotalGeral(){
+        $total=0;
+        foreach($this->produtos as $produto):
+            $total+=$produto->pivot->getTotal();
+        endforeach;
+        return $total;
+    }
+
+    public function getTotalGeralFormatado(){
+        return "R$ ".number_format($this->getTotalGeral(),2,",",".");
+    }
 }

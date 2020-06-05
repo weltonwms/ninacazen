@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function() {
     
     Route::resource('rents', 'RentController');
     Route::delete('/rents_bath','RentController@destroyBath' )->name('rents_bath.destroy');
-    
+    Route::get('rents/{rent}/print ','RentController@print')->name('rents.print');
     
     Route::get('users/changePassword','UserController@showChangePassword')->name('users.change');
     Route::post('users/changePassword','UserController@updatePassword')->name('users.updatePass');

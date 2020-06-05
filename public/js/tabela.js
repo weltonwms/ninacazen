@@ -125,7 +125,10 @@ function dataTableSubmit(event) {
 
     if (dados.type === 'link')
     {
-        window.location.href = route;
+        var alvo= event.target.getAttribute('target');
+        var newWindow= (alvo&&alvo=="_blank")?true:false;
+        newWindow?window.open(route):window.location.href = route;
+        //
         return true;
     }
 
