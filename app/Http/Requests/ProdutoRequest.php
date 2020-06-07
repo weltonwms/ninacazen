@@ -23,11 +23,17 @@ class ProdutoRequest extends FormRequest
      */
     public function rules()
     {
+        $produto=$this->route('produto');
+        $nrMin=0;
+        if($produto):
+            $nrMin=$produto->countRents();
+        endif;
+       
         return [
             'nome'=>"required",
             'valor_aluguel'=>"required",
             'valor_venda'=>"required",
-            'qtd_estoque'=>"required|numeric"
+            'qtd_estoque'=>"required|numeric|min:$nrMin"
         ];
     }
 }
