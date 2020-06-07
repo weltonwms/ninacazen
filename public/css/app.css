@@ -34,3 +34,14 @@
 #total_geral_tabela{
     font-weight: bold;
 }
+
+.tile.tile-nomargin{
+  margin-bottom: 0;
+  padding: 10px;
+}
+
+.tile.tile-mensagens{
+  margin-bottom: 0;
+  padding: 5px;
+  margin-top:-10px
+}

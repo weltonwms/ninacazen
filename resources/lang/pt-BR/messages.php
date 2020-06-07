@@ -9,7 +9,8 @@
 return[
     'actionUpdate'=>"Item Atualizado com Sucesso!",
     'actionCreate'=>"Item criado com Sucesso",
-    'actionQuitar'=>"Mensalidade Quitada com Sucesso",
+    'actionQuitar'=>"Aluguel Quitado com Sucesso",
+    'actionDesquitar'=>"Aluguel Desquitado com Sucesso",
     'actionDesativar'=>"Contrato Desativado com Sucesso",
     'error'=>"Erro ao Realizar a operação",
     'actionDelete' => '{0} Nenhum Item Deletado|{1} Um Item Apagado com Sucesso|[2,*] :count Itens Apagados com Sucesso',

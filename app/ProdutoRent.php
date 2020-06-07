@@ -18,4 +18,6 @@ class ProdutoRent extends Pivot
     public function getValorFormatado(){
         return "R$ ".number_format($this->valor_aluguel,2,",",".");
     }
+
+   
 }

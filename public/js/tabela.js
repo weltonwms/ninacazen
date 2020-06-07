@@ -102,7 +102,8 @@ var Tabela = (function () {
  */
 
 
-function dataTableSubmit(event) {
+function _dataTableSubmit(event) {
+   
     var dados = event.target.dataset;
     var ids = Tabela.getSelectedTable();
     var route = dados.route;
@@ -115,7 +116,7 @@ function dataTableSubmit(event) {
 
     if (!route)
     {
-        console.log('route undefined');
+        console.log('route undefined',dados.route);
     }
     if (ids[0] && route)
     {
@@ -136,7 +137,7 @@ function dataTableSubmit(event) {
     {
         confirmDelete(function () {
             $("#adminForm").attr('METHOD', 'POST');
-            $("#adminForm").attr('action', dados.route);
+            $("#adminForm").attr('action', route);
             $("#adminForm").append("<input type='hidden' name='_method' value='DELETE'>\n");
             ids.forEach(function (id) {
                 $("#adminForm").append("<input type='hidden' name='ids[]' value='" + id +
@@ -145,6 +146,19 @@ function dataTableSubmit(event) {
             $("#adminForm").submit();
 
         });
+        return true;
+    }
+
+    if (dados.type ==="patch")
+    {
+        var confirmTitle= dados.confirm;
+        var confirmContent= dados.confirmContent || event.target.title;
+        confirm(function(){
+            $("#adminForm").attr('METHOD', 'POST');
+            $("#adminForm").attr('action', route);
+            $("#adminForm").append("<input type='hidden' name='_method' value='PATCH'>\n");
+            $("#adminForm").submit();
+        }, confirmTitle,confirmContent);
         return true;
     }
 
@@ -166,4 +180,14 @@ $(".checkall").change(function(){
         t.rows({page:'current'}).deselect();
     }
 });
+
+/*
+Não sei se funciona. Tentativa de não aparecer dados.route=undefined.
+Problema de Tempo de carregamento.
+*/
+function dataTableSubmit(event){
+    $(document).ready(function(){
+        _dataTableSubmit(event);
+    });
+}
 

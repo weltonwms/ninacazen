@@ -15,8 +15,9 @@ class RentController extends Controller
      */
     public function index()
     {
-       $rents = Rent::with('cliente')->get();
-        return view("rents.index", compact('rents'));
+        $st=request('st',0);
+        $rents = Rent::with('cliente')->where('devolvido',$st)->get();
+        return view("rents.index", compact('rents','st'));
     }
 
     /**
@@ -126,14 +127,15 @@ class RentController extends Controller
     {
         $produtos= json_decode($request->produtos_json, true);
         $dados= [];
-        //montar array com índice sendo o produto_id. Ex: 3=>['qtd'=>10,'valor_aluguel'=>100]
+        
+        //montar array com índice sendo o produto_id. Ex: 3=>['qtd'=>10,'valor_aluguel'=>100,'devolvido'=>0]
         foreach($produtos as $produto):
             $product=$produto;
+            $product['devolvido']=$rent->devolvido;
             unset($product['produto_id']);
             $dados[$produto['produto_id']]=$product;
             
         endforeach;
-        
         $rent->produtos()->sync($dados);
         
     }
@@ -142,4 +144,22 @@ class RentController extends Controller
        
         return view('rents.print', compact('rent'));
     }
+
+    public function quitar(Rent $rent){
+       if($rent->quitar()):
+        \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionQuitar')]);
+       endif;
+
+       return redirect()->route('rents.index');
+  
+    }
+
+    public function desquitar(Rent $rent){
+        if($rent->desquitar()):
+         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionDesquitar')]);
+        endif;
+ 
+        return redirect()->route('rents.index');
+   
+     }
 }

@@ -104,4 +104,46 @@ class Rent extends Model
     public function getTotalGeralFormatado(){
         return "R$ ".number_format($this->getTotalGeral(),2,",",".");
     }
+
+    public function quitar(){
+        $this->devolvido=1;
+        $this->save();
+       foreach($this->produtos as $produto){
+           $produto->pivot->devolvido=1;
+       }
+       $retorno= $this->push();
+       //Outra Forma de Gravar dados na tabela pivot 'produto_rent'
+       //Nessa Forma o Observer não é disparado. Teria que Disparar Manualmente
+        // $affected = \App\ProdutoRent::where('rent_id', $rent->id)
+        //     ->update(['devolvido' => 1]);
+      
+       return $retorno;
+    }
+
+    public function desquitar(){
+        $this->devolvido=0;
+        $this->save();
+       foreach($this->produtos as $produto){
+           $produto->pivot->devolvido=0;
+       }
+       $retorno= $this->push();
+       //Outra Forma de Gravar dados na tabela pivot 'produto_rent'
+       //Nessa Forma o Observer não é disparado. Teria que Disparar Manualmente
+        // $affected = \App\ProdutoRent::where('rent_id', $rent->id)
+        //     ->update(['devolvido' => 0]);
+      
+       return $retorno;
+    }
+
+    public function getNomeStatus(){
+        $st= $this->devolvido==0?"Em Aberto":"Devolvido";
+        //considerando que se tem até meia noite para devolver;
+        $dataRetorno=Carbon::createFromFormat('d/m/Y', $this->data_retorno)->endOfDay();
+        $diaAtual=Carbon::now();
+        if($this->devolvido==0 && $diaAtual->gt($dataRetorno) ):
+            $st="<span class='text-danger'>Vencido</span>";
+        endif;
+       
+        return $st;
+    }
 }
