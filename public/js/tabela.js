@@ -102,9 +102,10 @@ var Tabela = (function () {
  */
 
 
-function _dataTableSubmit(event) {
-   
-    var dados = event.target.dataset;
+function dataTableSubmit(event) {
+    //observar a diferença do target para o currentTarget
+    //o target pega o <i> por exemplo sendo o elemento clicado
+    var dados = event.currentTarget.dataset;
     var ids = Tabela.getSelectedTable();
     var route = dados.route;
     if (ids.length === 0)
@@ -126,7 +127,7 @@ function _dataTableSubmit(event) {
 
     if (dados.type === 'link')
     {
-        var alvo= event.target.getAttribute('target');
+        var alvo= event.currentTarget.getAttribute('target');
         var newWindow= (alvo&&alvo=="_blank")?true:false;
         newWindow?window.open(route):window.location.href = route;
         //
@@ -152,7 +153,7 @@ function _dataTableSubmit(event) {
     if (dados.type ==="patch")
     {
         var confirmTitle= dados.confirm;
-        var confirmContent= dados.confirmContent || event.target.title;
+        var confirmContent= dados.confirmContent || event.currentTarget.title;
         confirm(function(){
             $("#adminForm").attr('METHOD', 'POST');
             $("#adminForm").attr('action', route);
@@ -181,13 +182,4 @@ $(".checkall").change(function(){
     }
 });
 
-/*
-Não sei se funciona. Tentativa de não aparecer dados.route=undefined.
-Problema de Tempo de carregamento.
-*/
-function dataTableSubmit(event){
-    $(document).ready(function(){
-        _dataTableSubmit(event);
-    });
-}
 
