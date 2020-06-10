@@ -43,6 +43,7 @@ class RentController extends Controller
     public function store(RentRequest $request)
     {
          $rent= Rent::create($request->all());
+         $rent->devolvido=0; //$rent original não possui info de devolvido
          $this->saveProdutos($rent, $request);
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionCreate')]);
         return redirect('rents');
@@ -131,7 +132,7 @@ class RentController extends Controller
         //montar array com índice sendo o produto_id. Ex: 3=>['qtd'=>10,'valor_aluguel'=>100,'devolvido'=>0]
         foreach($produtos as $produto):
             $product=$produto;
-            $product['devolvido']=$rent->devolvido;
+            $product['devolvido']= (int) $rent->devolvido;
             unset($product['produto_id']);
             $dados[$produto['produto_id']]=$product;
             
