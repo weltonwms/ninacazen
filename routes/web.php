@@ -30,6 +30,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('rents/{rent}/print ','RentController@print')->name('rents.print');
     Route::patch('rents/{rent}/quitar', 'RentController@quitar');
     Route::patch('rents/{rent}/desquitar', 'RentController@desquitar');
+
+    Route::resource('vendas', 'VendaController');
+    Route::delete('/vendas_bath','VendaController@destroyBath' )->name('vendas_bath.destroy');
+    Route::get('vendas{venda}/print ','VendaController@print')->name('vendas.print');
+
     
     Route::get('users/changePassword','UserController@showChangePassword')->name('users.change');
     Route::post('users/changePassword','UserController@updatePassword')->name('users.updatePass');
