@@ -14,7 +14,7 @@
             <i class="app-menu__icon fa fa-taxi"></i>
             <span class="app-menu__label">Aluguéis</span></a>
     </li>
-    <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-cart-plus"></i><span
+    <li><a class="app-menu__item" href="{{route('vendas.index')}}"><i class="app-menu__icon fa fa-cart-plus"></i><span
               class="app-menu__label">Vendas</span></a>
     </li>
               <li><a class="app-menu__item" href="{{route('users.index')}}"><i class="app-menu__icon fa fa-user-secret"></i><span
