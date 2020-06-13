@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Blade; //add para facilitar componente blade
 use App\Observers\ProdutoRentObserver; //usado para eventos em ProdutoRent
 use App\ProdutoRent;
 
+use App\Observers\ProdutoVendaObserver; //usado para eventos em ProdutoVenda
+use App\ProdutoVenda;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,5 +42,6 @@ class AppServiceProvider extends ServiceProvider
         \Form::component('bsPassword', 'components.form.password', ['name',  'attributes' => []]);
         \Form::component('bsSelect', 'components.form.select', ['name', 'list'=>[],'value'=>null, 'attributes' => []]);
         ProdutoRent::observe(ProdutoRentObserver::class);
+        ProdutoVenda::observe(ProdutoVendaObserver::class);
     }
 }

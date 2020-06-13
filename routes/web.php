@@ -41,4 +41,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('users', 'UserController');
     Route::delete('/users_bath','UserController@destroyBath' )->name('users_bath.destroy');
 
+    Route::get('teste','VendaController@teste');
+
 });

@@ -8,6 +8,14 @@ class Produto extends Model
 {
     protected $fillable = ['nome', 'descricao', 'valor_aluguel', 'valor_venda', 'qtd_estoque'];
 
+    public function vendas()
+    {
+        return $this->belongsToMany('App\Venda')
+            ->using('App\ProdutoVenda')
+            ->withPivot('qtd', 'valor_venda')
+            ->withTimestamps();
+    }
+
     public function rents()
     {
         return $this->belongsToMany('App\Rent')
@@ -23,6 +31,16 @@ class Produto extends Model
         $count = 0;
         foreach ($produtosAlugados as $produtoRent):
             $count += $produtoRent->pivot->qtd;
+        endforeach;
+        return $count;
+    }
+
+    public function countVendas()
+    {
+        $produtosVendidos = $this->vendas;
+        $count = 0;
+        foreach ($produtosVendidos as $produtoVenda):
+            $count += $produtoVenda->pivot->qtd;
         endforeach;
         return $count;
     }

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ProdutoVenda extends Pivot
 {
+   // public $incrementing = true;
+
     public function getTotal(){
         return $this->valor_venda * $this->qtd;
     }
