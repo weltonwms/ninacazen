@@ -61,7 +61,7 @@
                         <input type="hidden" id="formProduto_id" value="">
                         <div class="form-group col-md-8">
                             <label for="formProduto_produto" class="col-form-label">Produto:</label>
-                            <select class="form-control" id="formProduto_produto_id">
+                            <select class="form-control" id="formProduto_produto_id" style="width: 100%">
                                 <option value="">--Selecione--</option>
                                 <?php foreach ($produtos as $produto): ?>
                                     <option value="<?php echo $produto->id ?>" data-obj="<?php echo base64_encode(json_encode($produto)) ?>">

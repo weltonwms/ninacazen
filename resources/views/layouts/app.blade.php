@@ -63,6 +63,7 @@
    <script src="{{ asset('template/js/plugins/moment.min.js') }}"></script>
    <script src="{{ asset('template/js/plugins/sweetalert.min.js') }}"></script>
    <script src="{{ asset('template/js/plugins/jquery.mask.min.js') }}"></script>
+   <script src="{{ asset('template/js/plugins/select2.min.js') }}"></script>
   <!-- The javascript plugin to display page loading on top-->
   <script src="{{ asset('template/js/plugins/pace.min.js') }}"></script>
   <!-- Main javascript to App-->

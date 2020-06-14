@@ -192,6 +192,7 @@ TelaProduto=(function(){
         $("#formProduto_qtd_disponivel").val(getQtdDisponivelAtual());
         $("#formProduto_valor_aluguel").val(valorFormatado(valor_aluguel));
         $("#formProduto_id").val(index);
+        $('#formProduto_produto_id').trigger('change'); //avisar o select2 da mudança
     }
 
     function resetFormProduto() {
@@ -205,6 +206,7 @@ TelaProduto=(function(){
         $("#formProduto_valor_aluguel").val('');
         $("#formProduto_total").val('');
         $("#formProduto_qtd_disponivel").val('');
+        $('#formProduto_produto_id').trigger('change'); //avisar o select2 da mudança
     }
 
     return {

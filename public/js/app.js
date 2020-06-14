@@ -77,5 +77,11 @@ $(document).ready(function () {
     }); //fim  KEYUP função busca CEP
     //FIM BUSCA CEP
 
+    $('.select2').select2();
+    $('#formProduto_produto_id').select2({
+         dropdownParent: $('#ModalFormProduto'),
+         width: 'style' 
+     });
+
 });
 

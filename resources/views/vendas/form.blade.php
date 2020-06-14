@@ -1,10 +1,13 @@
 <div class="form-row">
     <div class="col-md-4">
-        {{ Form::bsSelect('cliente_id',$clientes,null,['label'=>"Cliente *", 'placeholder' => '--Selecione--']) }}
+        {{ Form::bsSelect('cliente_id',$clientes,null,['label'=>"Cliente *", 'placeholder' => '--Selecione--','class'=>'select2']) }}
 
     </div>
     <div class="col-md-4 ">
-        {{ Form::bsDate('data_venda',null,['label'=>"Data Venda *"]) }}
+        <?php
+            $dtVenda= isset($venda)  ? null : \Carbon\Carbon::now()->format('Y-m-d');
+        ?>
+        {{ Form::bsDate('data_venda',$dtVenda,['label'=>"Data Venda *"]) }}
     </div>
    
     <div class="col-md-4">
@@ -17,6 +20,7 @@
 @enderror
 
 @include('vendas.produto-venda')
+
 
 
 
