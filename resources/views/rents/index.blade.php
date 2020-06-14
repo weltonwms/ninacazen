@@ -9,9 +9,11 @@ Alugueis'])
 
 @section('toolbar')
 @toolbar
+@if($st!=1)
 <a class="btn btn-sm btn-success mr-1 mb-1" href="{{route('rents.create')}}">
     <i class="fa fa-plus-circle"></i>Novo
 </a>
+@endif
 
 <button class="btn btn-sm btn-outline-secondary mr-1 mb-1" type="button" data-type="link"
     data-route="{{url('rents/{id}/edit')}}" onclick="dataTableSubmit(event)">

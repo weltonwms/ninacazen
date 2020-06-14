@@ -16,6 +16,7 @@ class RentController extends Controller
     public function index()
     {
         $st=request('st',0);
+        session(['st'=>$st]); //útil para proximas requisições manter na mesma tela
         $rents = Rent::with('cliente')->where('devolvido',$st)->get();
         return view("rents.index", compact('rents','st'));
     }
@@ -89,7 +90,7 @@ class RentController extends Controller
          $rent->update($request->all());
          $this->saveProdutos($rent, $request);
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionUpdate')]);
-        return redirect()->route('rents.index');
+        return redirect()->route('rents.index',['st'=>session()->get('st')]);
       
     }
 
@@ -109,7 +110,7 @@ class RentController extends Controller
            \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionDelete')]);
        endif;
 
-       return redirect()->route('rents.index');
+       return redirect()->route('rents.index',['st'=>session()->get('st')]);
     }
     
     public function destroyBath()
@@ -121,7 +122,7 @@ class RentController extends Controller
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionDelete', $retorno)]);
         endif;
 
-        return redirect()->route('rents.index');
+        return redirect()->route('rents.index',['st'=>session()->get('st')]);
     }
     
     private function saveProdutos($rent, $request)
@@ -160,7 +161,7 @@ class RentController extends Controller
          \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionDesquitar')]);
         endif;
  
-        return redirect()->route('rents.index');
+        return redirect()->route('rents.index',['st'=>session()->get('st')]);
    
      }
 }

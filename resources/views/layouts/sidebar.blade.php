@@ -1,25 +1,45 @@
- <!-- Sidebar menu-->
- <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
- <aside class="app-sidebar">
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
 
-   <ul class="app-menu">
-     <li><a class="app-menu__item" href="{{ url('/home') }}"><i class="app-menu__icon fa fa-dashboard"></i><span
-           class="app-menu__label">Painel de Controle</span></a></li>
-
-     <li><a class="app-menu__item" href="{{route('clientes.index')}}"><i class="app-menu__icon fa fa-users"></i><span
-           class="app-menu__label">Clientes</span></a></li>
-    <li><a class="app-menu__item" href="{{route('produtos.index')}}"><i class="app-menu__icon fa fa-gift"></i><span
-            class="app-menu__label">Produtos</span></a></li>
-    <li><a class="app-menu__item" href="{{route('rents.index')}}">
-            <i class="app-menu__icon fa fa-taxi"></i>
-            <span class="app-menu__label">Aluguéis</span></a>
+  <ul class="app-menu">
+    <li>
+      <a class="app-menu__item {{Request::segment(1)=='home'?'active':null}}" href="{{ url('/home') }}">
+        <i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Painel de Controle</span>
+      </a>
     </li>
-    <li><a class="app-menu__item" href="{{route('vendas.index')}}"><i class="app-menu__icon fa fa-cart-plus"></i><span
-              class="app-menu__label">Vendas</span></a>
+
+    <li>
+      <a class="app-menu__item {{Request::segment(1)=='clientes'?'active':null}}" href="{{route('clientes.index')}}">
+        <i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Clientes</span>
+      </a>
     </li>
-              <li><a class="app-menu__item" href="{{route('users.index')}}"><i class="app-menu__icon fa fa-user-secret"></i><span
-                class="app-menu__label">Usuários</span></a></li>
 
-   </ul>
+    <li>
+      <a class="app-menu__item {{Request::segment(1)=='produtos'?'active':null}}" href="{{route('produtos.index')}}">
+        <i class="app-menu__icon fa fa-gift"></i><span class="app-menu__label">Produtos</span>
+      </a>
+    </li>
 
- </aside>
+    <li>
+      <a class="app-menu__item {{Request::segment(1)=='rents'?'active':null}}" href="{{route('rents.index')}}">
+        <i class="app-menu__icon fa fa-taxi"></i>
+        <span class="app-menu__label">Aluguéis</span>
+      </a>
+    </li>
+
+    <li>
+      <a class="app-menu__item {{Request::segment(1)=='vendas'?'active':null}}" href="{{route('vendas.index')}}">
+        <i class="app-menu__icon fa fa-cart-plus"></i><span class="app-menu__label">Vendas</span>
+      </a>
+    </li>
+
+    <li><a class="app-menu__item {{Request::segment(1)=='users'?'active':null}}" href="{{route('users.index')}}">
+        <i class="app-menu__icon fa fa-user-secret"></i>
+        <span class="app-menu__label">Usuários</span>
+      </a>
+    </li>
+
+  </ul>
+
+</aside>

@@ -16,8 +16,8 @@ class VendaController extends Controller
      */
     public function index()
     {
-        $vendas = Venda::with('cliente')->get();
-        return view("vendas.index", compact('vendas'));
+       $vendas = Venda::with('cliente')->get();
+       return view("vendas.index", compact('vendas'));
     }
 
     /**
@@ -144,7 +144,10 @@ class VendaController extends Controller
 
     public function teste()
     {
-      
+        //request()->session()->put('nome','welton');
+       
+        $x=session()->get('st');
+        print_r($x);
         exit('<br>acabou');
     }
 
