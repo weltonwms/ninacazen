@@ -170,4 +170,10 @@ class RentController extends Controller
         return redirect()->route('rents.index',['st'=>session()->get('st')]);
    
      }
+
+     public function detailAjax(Rent $rent)
+     {
+        return view('rents.detail', compact('rent'));
+     }
+
 }

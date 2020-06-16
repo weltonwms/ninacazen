@@ -30,10 +30,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('rents/{rent}/print ','RentController@print')->name('rents.print');
     Route::patch('rents/{rent}/quitar', 'RentController@quitar');
     Route::patch('rents/{rent}/desquitar', 'RentController@desquitar');
+    Route::get('rents/{rent}/detailAjax ','RentController@detailAjax')->name('rents.detailAjax');
 
     Route::resource('vendas', 'VendaController');
     Route::delete('/vendas_bath','VendaController@destroyBath' )->name('vendas_bath.destroy');
     Route::get('vendas/{venda}/print ','VendaController@print')->name('vendas.print');
+    Route::get('vendas/{venda}/detailAjax ','VendaController@detailAjax')->name('vendas.detailAjax');
 
     
     Route::get('users/changePassword','UserController@showChangePassword')->name('users.change');
@@ -41,6 +43,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('users', 'UserController');
     Route::delete('/users_bath','UserController@destroyBath' )->name('users_bath.destroy');
 
-    Route::get('teste','VendaController@teste');
+    
 
 });

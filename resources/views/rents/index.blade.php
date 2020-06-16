@@ -76,7 +76,10 @@ Alugueis'])
     <tr>
 
         <td></td>
-        <td><a href="{{route('rents.edit', $rent->id)}}">{!!$rent->getNomeStatus()!!}</a></td>
+        <td>
+        <button onclick="showDetailRent(event)" data-id="{{$rent->id}}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></button>
+            <a href="{{route('rents.edit', $rent->id)}}">{!!$rent->getNomeStatus()!!}</a>
+        </td>
         <td>{{$rent->cliente->nome}}</td>
         <td>{{$rent->data_saida}}</td>
         <td>{{$rent->data_retorno}}</td>
@@ -86,6 +89,27 @@ Alugueis'])
     @endforeach
 </tbody>
 @enddatatables
+
+<!--Modal de Detalhe do Aluguel -->
+<div class="modal" tabindex="-1" role="dialog" id="modal_detalhar_aluguel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title"><i class="fa fa-eye "></i> Detalhes do Aluguel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Texto do corpo do modal, é aqui.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Fim de Detalhe do Aluguel -->
 @endsection
 
 @push('scripts')
@@ -102,6 +126,19 @@ $(document).ready(function() {
  $("#select-status").change(function(e){
        window.location.href = this.dataset.url+'?st='+this.value;
 });
+
+function showDetailRent(event){
+    event.preventDefault();
+    var dados= event.currentTarget.dataset;
+    $.ajax({
+        dataType:"html",
+        url:"rents/"+dados.id+"/detailAjax",
+        success:function(data){
+            $('#modal_detalhar_aluguel .modal-body').html(data);
+            $("#modal_detalhar_aluguel").modal('show');
+        }
+    });
+}
 
 </script>
 

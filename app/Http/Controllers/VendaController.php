@@ -150,13 +150,10 @@ class VendaController extends Controller
         return view('vendas.print', compact('venda'));
     }
 
-    public function teste()
+    public function detailAjax(Venda $venda)
     {
-        //request()->session()->put('nome','welton');
-       
-        $x=session()->get('st');
-        print_r($x);
-        exit('<br>acabou');
+       return view('vendas.detail', compact('venda'));
     }
+
 
 }

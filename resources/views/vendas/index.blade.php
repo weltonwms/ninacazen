@@ -43,7 +43,7 @@ Vendas'])
         <th>ID</th>
         <th>Cliente</th>
         <th>Data Venda</th>
-        
+
         <th>Observação</th>
         <th>ID</th>
     </tr>
@@ -54,16 +54,43 @@ Vendas'])
     <tr>
 
         <td></td>
-        <td><a href="{{route('vendas.edit', $venda->id)}}">{{$venda->id}}</a></td>
+        <td>
+            <button onclick="showDetailVenda(event)" data-id="{{$venda->id}}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></button>
+            <a href="{{route('vendas.edit', $venda->id)}}">{{$venda->id}}</a>
+        </td>
         <td>{{$venda->cliente->nome}}</td>
         <td>{{$venda->data_venda}}</td>
-       
+
         <td>{{$venda->observacao}}</td>
         <td>{{$venda->id}}</td>
     </tr>
     @endforeach
 </tbody>
 @enddatatables
+
+<!--Modal de Detalhe da Venda -->
+<div class="modal" tabindex="-1" role="dialog" id="modal_detalhar_venda">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title"><i class="fa fa-eye "></i> Detalhes da Venda</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Texto do corpo do modal, é aqui.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Fim de Detalhe da Venda -->
+
+
+
 @endsection
 
 @push('scripts')
@@ -76,7 +103,18 @@ $(document).ready(function() {
     Tabela.getInstance({colId:5}); //instanciando dataTable e informando a coluna do id
 });
    //fim start Datatable//
-
+function showDetailVenda(event){
+    event.preventDefault();
+    var dados= event.currentTarget.dataset;
+    $.ajax({
+        dataType:"html",
+        url:"vendas/"+dados.id+"/detailAjax",
+        success:function(data){
+            $('#modal_detalhar_venda .modal-body').html(data);
+            $("#modal_detalhar_venda").modal('show');
+        }
+    });
+}
  
 
 </script>
