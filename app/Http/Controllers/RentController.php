@@ -47,7 +47,10 @@ class RentController extends Controller
          $rent->devolvido=0; //$rent original não possui info de devolvido
          $this->saveProdutos($rent, $request);
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionCreate')]);
-        return redirect('rents');
+        if ($request->input('fechar') == 1):
+            return redirect()->route('rents.index');
+        endif;
+        return redirect()->route('rents.edit',$rent->id);
     }
 
     /**
@@ -90,8 +93,11 @@ class RentController extends Controller
          $rent->update($request->all());
          $this->saveProdutos($rent, $request);
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionUpdate')]);
-        return redirect()->route('rents.index',['st'=>session()->get('st')]);
-      
+        if ($request->input('fechar') == 1):
+            return redirect()->route('rents.index',['st'=>session()->get('st')]);
+        endif;
+        return redirect()->route('rents.edit',$rent->id);
+     
     }
 
     /**

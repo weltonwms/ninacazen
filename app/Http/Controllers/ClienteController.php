@@ -37,9 +37,12 @@ class ClienteController extends Controller
      */
     public function store(ClienteRequest $request)
     {
-        Cliente::create($request->all());
+        $cliente=Cliente::create($request->all());
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionCreate')]);
-        return redirect('clientes');
+        if ($request->input('fechar') == 1):
+            return redirect('clientes');
+        endif;
+        return redirect()->route('clientes.edit',$cliente->id);
     }
 
     
@@ -67,7 +70,11 @@ class ClienteController extends Controller
 
         $cliente->update($request->all());
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionUpdate')]);
-        return redirect()->route('clientes.index');
+        if ($request->input('fechar') == 1):
+            return redirect()->route('clientes.index');
+        endif;
+        return redirect()->route('clientes.edit',$cliente->id);
+       
     }
 
     

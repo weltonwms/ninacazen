@@ -45,7 +45,11 @@ class VendaController extends Controller
         $venda = Venda::create($request->all());
         $this->saveProdutos($venda, $request);
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionCreate')]);
-        return redirect('vendas');
+        if ($request->input('fechar') == 1):
+            return redirect()->route('vendas.index');
+        endif;
+        return redirect()->route('vendas.edit',$venda->id);
+       
     }
 
     /**
@@ -87,7 +91,11 @@ class VendaController extends Controller
         $venda->update($request->all());
         $this->saveProdutos($venda, $request);
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionUpdate')]);
-        return redirect()->route('vendas.index');
+        if ($request->input('fechar') == 1):
+            return redirect()->route('vendas.index');
+        endif;
+        return redirect()->route('vendas.edit',$venda->id);
+        
     }
 
     /**

@@ -8,7 +8,8 @@
 @section('toolbar')
 @toolbar
 <a href="" class="btn btn-sm btn-success mr-1 mb-1" onclick="adminFormSubmit(event)" > <i class="fa fa-save"></i>Salvar</a>
-<a class="btn btn-sm btn-outline-secondary mr-1 mb-1"  href="{{url()->previous()}}" > <i class="fa fa-close"></i>Cancelar</a>
+<a href='' class="btn btn-sm btn-outline-secondary mr-1 mb-1" data-close='1' onclick="adminFormSubmit(event)" > <i class="fa fa-save"></i>Salvar e Fechar</a>
+<a class="btn btn-sm btn-outline-secondary mr-1 mb-1"  href="{{url('rents?st='.session('st'))}}" > <i class="fa fa-close"></i>Cancelar</a>
 
 @endtoolbar
 @endsection

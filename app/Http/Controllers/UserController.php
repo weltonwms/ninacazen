@@ -60,9 +60,13 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $dados=  $this->tratarDados($request->all());
-        User::create($dados);
+        $user=User::create($dados);
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionCreate')]);
-        return redirect('users');
+        if ($request->input('fechar') == 1):
+            return redirect()->route('users.index');
+        endif;
+        return redirect()->route('users.edit',$user->id);
+        
     }
 
     /**
@@ -100,7 +104,11 @@ class UserController extends Controller
         $dados=  $this->tratarDados($request->all());
         $user->update($dados);
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionUpdate')]);
-        return redirect()->route('users.index');
+        if ($request->input('fechar') == 1):
+            return redirect()->route('users.index');
+        endif;
+        return redirect()->route('users.edit',$user->id);
+       
     }
 
     /**
@@ -122,8 +130,7 @@ class UserController extends Controller
 
     public function destroyBath()
     {
-        
-     $retorno= User::destroy(request('ids'));
+      $retorno= User::destroy(request('ids'));
      if ($retorno):
             \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionDelete', $retorno)]);
         endif;

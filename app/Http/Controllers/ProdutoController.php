@@ -41,7 +41,10 @@ class ProdutoController extends Controller
         $produto->qtd_disponivel=$produto->qtd_estoque;
         $produto->save();
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionCreate')]);
-        return redirect('produtos');
+        if ($request->input('fechar') == 1):
+            return redirect('produtos');
+        endif;
+        return redirect()->route('produtos.edit',$produto->id);
     }
 
     /**
@@ -78,7 +81,11 @@ class ProdutoController extends Controller
         $produto->update($request->all());
         $produto->updateQtdDisponivel();
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionUpdate')]);
-        return redirect()->route('produtos.index');
+        if ($request->input('fechar') == 1):
+            return redirect()->route('produtos.index');
+        endif;
+        return redirect()->route('produtos.edit',$produto->id);
+        
     }
 
     /**

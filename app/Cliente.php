@@ -30,7 +30,10 @@ class Cliente extends Model
     
     public function formNascimentoAttribute($value)
     {
-        return Carbon::parse($value)->format('Y-m-d');
+        if($value):
+            return Carbon::parse($value)->format('Y-m-d');
+        endif;
+       
     }
     
     
