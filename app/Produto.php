@@ -78,4 +78,38 @@ class Produto extends Model
         endif;
         $this->attributes['valor_venda'] = $price;
     }
+
+    public static function verifyAndDestroy(array $ids)
+    {
+        $nrRents= \App\ProdutoRent::whereIn("produto_id",$ids)->count();
+        $nrVendas= \App\ProdutoVenda::whereIn("produto_id",$ids)->count();
+        $nrTotal=$nrVendas+$nrRents;
+        $msg=[];
+        if($nrRents > 0):
+            $msg[]="Produto(s) Relacionado(s) a Aluguel";
+        endif;
+        if($nrVendas > 0):
+            $msg[]="Produto(s) Relacionado(s) a Venda";
+        endif;
+        if($nrTotal > 0):
+            \Session::flash('mensagem', ['type' => 'danger', 'conteudo' => implode("<br>",$msg)]);
+            return false;
+        else:
+            return self::destroy($ids);
+        endif;
+    }
+
+    public function verifyAndDelete()
+    {
+        $nrVendas=$this->vendas->count();
+        $nrRents=\App\ProdutoRent::where('produto_id', $this->id)->count(); //não uso pivot, porcausa do where devolvido==0
+        $nrTotal=$nrVendas+$nrRents;
+        if($nrTotal > 0):
+            \Session::flash('mensagem', ['type' => 'danger', 'conteudo' => "Produto(s) Relacionado(s) a Venda ou Aluguel"]);
+            return false;
+        else:
+            return $this->delete();
+        endif;
+    }
+
 }

@@ -42,7 +42,7 @@
       
             <div class="alert alert-{{session('mensagem.type')}} alert-dismissable ">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{session('mensagem.conteudo')}}
+                {!!session('mensagem.conteudo')!!}
             </div>
      @endif
 

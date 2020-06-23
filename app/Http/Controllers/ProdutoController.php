@@ -96,8 +96,7 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-       //$retorno = $produto->verifyAndDelete();
-       $retorno = $produto->delete();
+       $retorno = $produto->verifyAndDelete();
        if ($retorno):
            \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionDelete')]);
        endif;
@@ -107,8 +106,7 @@ class ProdutoController extends Controller
 
     public function destroyBath()
     {
-        
-     $retorno= Produto::destroy(request('ids'));
+     $retorno= Produto::verifyAndDestroy(request('ids'));
      if ($retorno):
             \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionDelete', $retorno)]);
         endif;

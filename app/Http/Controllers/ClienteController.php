@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\ClienteRequest;
 use App\Cliente;
+use App\Http\Requests\ClienteRequest;
+use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
@@ -37,21 +37,19 @@ class ClienteController extends Controller
      */
     public function store(ClienteRequest $request)
     {
-        $cliente=Cliente::create($request->all());
+        $cliente = Cliente::create($request->all());
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionCreate')]);
         if ($request->input('fechar') == 1):
             return redirect('clientes');
         endif;
-        return redirect()->route('clientes.edit',$cliente->id);
+        return redirect()->route('clientes.edit', $cliente->id);
     }
 
-    
     public function show(Cliente $cliente)
     {
-       return $cliente;
+        return $cliente;
     }
 
-    
     public function edit(Cliente $cliente)
     {
         return view('clientes.edit', compact('cliente'));
@@ -67,37 +65,30 @@ class ClienteController extends Controller
     public function update(ClienteRequest $request, Cliente $cliente)
     {
 
-
         $cliente->update($request->all());
         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionUpdate')]);
         if ($request->input('fechar') == 1):
             return redirect()->route('clientes.index');
         endif;
-        return redirect()->route('clientes.edit',$cliente->id);
-       
+        return redirect()->route('clientes.edit', $cliente->id);
+
     }
 
-    
     public function destroy(Cliente $cliente)
     {
-
-        //$retorno = $cliente->verifyAndDelete();
-        $retorno = $cliente->delete();
+        $retorno = $cliente->verifyAndDelete();
         if ($retorno):
             \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionDelete')]);
         endif;
-
         return redirect()->route('clientes.index');
     }
-    
+
     public function destroyBath()
     {
-        
-     $retorno= Cliente::destroy(request('ids'));
-     if ($retorno):
+        $retorno = Cliente::verifyAndDestroy(request('ids'));
+        if ($retorno):
             \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionDelete', $retorno)]);
         endif;
-
         return redirect()->route('clientes.index');
     }
 
