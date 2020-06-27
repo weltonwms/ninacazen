@@ -146,4 +146,31 @@ class Rent extends Model
        
         return $st;
     }
+
+    public static function quitarBath($ids){
+        $rents= self::whereIn('id',$ids)->get();
+        $retorno=true;
+        foreach($rents as $rent):
+            $retorno= $retorno && $rent->quitar();
+        endforeach;
+
+        if(!$retorno):
+            \Session::flash('mensagem', ['type' => 'danger', 'conteudo' => "Erro ao Quitar!"]);
+        endif;
+        return $retorno;
+    }
+
+    public static function desquitarBath($ids){
+        $rents= self::whereIn('id',$ids)->get();
+        $retorno=true;
+        foreach($rents as $rent):
+            $retorno= $retorno && $rent->desquitar();
+        endforeach;
+
+        if(!$retorno):
+            \Session::flash('mensagem', ['type' => 'danger', 'conteudo' => "Erro ao Desquitar!"]);
+        endif;
+        return $retorno;
+    }
+
 }

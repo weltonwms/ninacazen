@@ -59,8 +59,9 @@ class RentController extends Controller
      * @param  \App\Rent  $rent
      * @return \Illuminate\Http\Response
      */
-    public function show(Rent $rent)
+    public function show()
     {
+        dd('show');
         return $rent->load('produtos');
     }
 
@@ -155,7 +156,7 @@ class RentController extends Controller
 
     public function quitar(Rent $rent){
        if($rent->quitar()):
-        \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionQuitar')]);
+        \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionQuitar',1)]);
        endif;
 
        return redirect()->route('rents.index');
@@ -164,11 +165,29 @@ class RentController extends Controller
 
     public function desquitar(Rent $rent){
         if($rent->desquitar()):
-         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans('messages.actionDesquitar')]);
+         \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionDesquitar',1)]);
         endif;
  
         return redirect()->route('rents.index',['st'=>session()->get('st')]);
    
+     }
+
+     public function quitarBath(){
+        $retorno=Rent::quitarBath(request('ids'));
+        $count=count(request('ids'));
+        if($retorno){
+            \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionQuitar',$count)]);
+        }
+        return redirect()->route('rents.index');
+     }
+
+     public function desquitarBath(){
+        $retorno=Rent::desquitarBath(request('ids'));
+        $count=count(request('ids'));
+        if($retorno){
+            \Session::flash('mensagem', ['type' => 'success', 'conteudo' => trans_choice('messages.actionDesquitar',$count)]);
+        }
+        return redirect()->route('rents.index',['st'=>session()->get('st')]);
      }
 
      public function detailAjax(Rent $rent)

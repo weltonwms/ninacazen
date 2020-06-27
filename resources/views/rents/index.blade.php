@@ -26,7 +26,7 @@ Alugueis'])
 </button>
 @if($st==0)
 <button class="btn btn-sm btn-outline-secondary mr-1 mb-1" type="button" data-type="patch"
-    data-route="{{url('rents/{id}/quitar')}}" onclick="dataTableSubmit(event)" 
+    data-route="{{url('rents_bath/quitar')}}" onclick="dataTableSubmit(event)" 
     data-confirm="Deseja Realmente Quitar? " title="Colocar como Devolvido">
     <i class="fa fa-check-square-o"></i>Quitar
 </button>
@@ -34,7 +34,7 @@ Alugueis'])
 
 @if($st==1)
 <button class="btn btn-sm btn-outline-secondary mr-1 mb-1" type="button" data-type="patch"
-    data-route="{{url('rents/{id}/desquitar')}}" onclick="dataTableSubmit(event)" 
+    data-route="{{url('rents_bath/desquitar')}}" onclick="dataTableSubmit(event)" 
     data-confirm="Deseja Realmente Desquitar? " title="Desfazer Devolução">
     <i class="fa fa-square-o"></i>Desquitar
 </button>
@@ -91,7 +91,7 @@ Alugueis'])
 @enddatatables
 
 <!--Modal de Detalhe do Aluguel -->
-<div class="modal" tabindex="-1" role="dialog" id="modal_detalhar_aluguel">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_detalhar_aluguel">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">

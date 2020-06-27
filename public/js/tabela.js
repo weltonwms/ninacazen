@@ -158,6 +158,10 @@ function dataTableSubmit(event) {
             $("#adminForm").attr('METHOD', 'POST');
             $("#adminForm").attr('action', route);
             $("#adminForm").append("<input type='hidden' name='_method' value='PATCH'>\n");
+            ids.forEach(function (id) {
+                $("#adminForm").append("<input type='hidden' name='ids[]' value='" + id +
+                    "'>\n");
+            });
             $("#adminForm").submit();
         }, confirmTitle,confirmContent);
         return true;

@@ -69,7 +69,7 @@ Vendas'])
 @enddatatables
 
 <!--Modal de Detalhe da Venda -->
-<div class="modal" tabindex="-1" role="dialog" id="modal_detalhar_venda">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_detalhar_venda">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
