@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ProductAvailable; //Validação no Servidor de Qtd Disponível
 
 class RentRequest extends FormRequest
 {
@@ -23,11 +24,13 @@ class RentRequest extends FormRequest
      */
     public function rules()
     {
+        $rent=$this->route('rent');
+        
         return [
            'cliente_id'=>"required",
             'data_saida'=>"required|date",
             'data_retorno'=>"required|date",
-            'produtos_json'=>'required|not_in:[]'
+            'produtos_json'=>['required','not_in:[]', new ProductAvailable($rent)]
         ];
     }
     

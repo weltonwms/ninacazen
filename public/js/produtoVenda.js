@@ -28,7 +28,7 @@ ProdutoVendaModel= (function Produtos() {
     function inicializeItems() {
         var itemsJson = $("#produtos_json").val() || '[]';
         var itemsObj = JSON.parse(itemsJson);
-        ItensGravados.setItems(itemsObj);
+        ItensGravados.setItems();
         items = itemsObj;
         updateTableProduto();
     }
@@ -227,8 +227,10 @@ TelaProduto=(function(){
 ItensGravados=(function(){
     var items=[];
 
-    function setItems(itemsGravados){
-        Object.assign(items,itemsGravados);
+    function setItems(){
+        var valor= $('#itensGravados').val() || '[]';
+        items = JSON.parse(valor);
+        //Object.assign(items,itemsGravados);
     }
 
     function getQtdGravadaByProduto(produto_id){

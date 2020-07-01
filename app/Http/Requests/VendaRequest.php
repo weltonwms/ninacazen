@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ProductAvailable; //Validação no Servidor de Qtd Disponível
 
 class VendaRequest extends FormRequest
 {
@@ -23,10 +24,11 @@ class VendaRequest extends FormRequest
      */
     public function rules()
     {
+        $venda=$this->route('venda');
         return [
             'cliente_id'=>"required",
              'data_venda'=>"required|date",
-             'produtos_json'=>'required|not_in:[]'
+             'produtos_json'=>['required','not_in:[]', new ProductAvailable($venda)]
          ];
      }
      

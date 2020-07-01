@@ -59,10 +59,9 @@ class RentController extends Controller
      * @param  \App\Rent  $rent
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Rent $rent)
     {
-        dd('show');
-        return $rent->load('produtos');
+       return $rent->load('produtos');
     }
 
     /**
