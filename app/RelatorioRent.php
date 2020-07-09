@@ -14,9 +14,11 @@ class RelatorioRent extends Model
    
     public function getRelatorio()
     {
+        $sql="rents.id, rents.cliente_id, rents.data_saida, rents.data_retorno, 
+                rents.devolvido, clientes.nome, rent_id";
         $query = Rent::join('produto_rent', 'rents.id', '=', 'produto_rent.rent_id')
                     ->join('clientes', 'clientes.id', '=', 'rents.cliente_id')
-                     ->selectRaw('rents.*, clientes.nome, rent_id, sum((valor_aluguel * qtd)) as total');
+                     ->selectRaw("$sql, sum((valor_aluguel * qtd)) as total");
                     
         if (request('cliente_id')):
             $query->whereIn('cliente_id', request('cliente_id'));
@@ -46,7 +48,7 @@ class RelatorioRent extends Model
             $query->where('rents.devolvido', request('status'));
         endif;
 
-        $this->items=$query->groupBy('rent_id')
+        $this->items=$query->groupByRaw($sql)
         ->get();
 
         $this->calcTotalGeral();

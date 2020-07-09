@@ -14,9 +14,10 @@ class RelatorioVenda extends Model
    
     public function getRelatorio()
     {
+        $sql="vendas.id, vendas.cliente_id, vendas.data_venda, clientes.nome, venda_id";
         $query = Venda::join('produto_venda', 'vendas.id', '=', 'produto_venda.venda_id')
                     ->join('clientes', 'clientes.id', '=', 'vendas.cliente_id')
-                     ->selectRaw('vendas.*, clientes.nome, venda_id, sum((valor_venda * qtd)) as total');
+                     ->selectRaw("$sql, sum((valor_venda * qtd)) as total");
                     
         if (request('cliente_id')):
             $query->whereIn('cliente_id', request('cliente_id'));
@@ -32,7 +33,7 @@ class RelatorioVenda extends Model
             $query->where('data_venda', '<=', $dt);
         endif;
 
-        $this->items=$query->groupBy('venda_id')
+        $this->items=$query->groupByRaw($sql)
         ->get();
 
         $this->calcTotalGeral();
