@@ -47,6 +47,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('users', 'UserController');
     Route::delete('/users_bath','UserController@destroyBath' )->name('users_bath.destroy');
 
+    Route::match(['get', 'post'],"relatorio/rents",'RelatorioController@rents')->name('relatorio.rents');
+    Route::match(['get', 'post'],"relatorio/produtoRent",'RelatorioController@produtoRent')->name('relatorio.produtoRent');
+    Route::match(['get', 'post'],"relatorio/vendas",'RelatorioController@vendas')->name('relatorio.vendas');
+    Route::match(['get', 'post'],"relatorio/produtoVenda",'RelatorioController@produtoVenda')->name('relatorio.produtoVenda');
+
     
 
 });

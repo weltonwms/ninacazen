@@ -95,3 +95,8 @@ $(document).ready(function () {
 
 });
 
+function limparFormPesquisa(){
+    $('#form_pesquisa select, #form_pesquisa input[type=date]').val('');
+    $('#form_pesquisa select').trigger('change'); //avisar select2
+}
+
