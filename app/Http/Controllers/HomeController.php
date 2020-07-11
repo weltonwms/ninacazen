@@ -24,10 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         $dados=[
             "cards"=>Dashboard::getCards(),
+            "vendasMensais"=>json_encode(Dashboard::vendasMensais() ),
+            "rentsMensais"=>json_encode(Dashboard::rentsMensais() ),
         ];
-     
+       
         return view('dashboard.home',$dados);
     }
 }

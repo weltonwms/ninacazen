@@ -22,34 +22,10 @@
 
 
 
+{{-- inicio charts --}}
+@include('dashboard.charts')
+{{-- temino charts --}}
 
 
-
-
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="tile">
-      {{-- inicio corpo --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {{-- Fim corpo --}}
-    </div>
-  </div>
-</div>
 
 @endsection
