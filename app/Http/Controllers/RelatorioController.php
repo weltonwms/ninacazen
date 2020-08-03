@@ -56,4 +56,24 @@ class RelatorioController extends Controller
         ];
         return view("relatorios.produto-venda", $dados);
     }
+
+    public function printVendas(Request $request)
+    {
+      $relatorio = new RelatorioVenda();
+      $dados=[
+            'relatorio' => $relatorio->getRelatorio(),
+        ];
+        return view("relatorios.print.vendas", $dados);
+    }
+
+    public function printRents(Request $request)
+    {
+      $relatorio = new RelatorioRent();
+      $dados=[
+            'relatorio' => $relatorio->getRelatorio(),
+        ];
+        return view("relatorios.print.rents", $dados);
+    }
+
+   
 }

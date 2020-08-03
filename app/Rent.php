@@ -135,13 +135,13 @@ class Rent extends Model
        return $retorno;
     }
 
-    public function getNomeStatus(){
+    public function getNomeStatus($estilo=true){
         $st= $this->devolvido==0?"Em Aberto":"Devolvido";
         //considerando que se tem até meia noite para devolver;
         $dataRetorno=Carbon::createFromFormat('d/m/Y', $this->data_retorno)->endOfDay();
         $diaAtual=Carbon::now();
         if($this->devolvido==0 && $diaAtual->gt($dataRetorno) ):
-            $st="<span class='text-danger'>Vencido</span>";
+            $st= $estilo?"<span class='text-danger'>Vencido</span>":"Vencido";
         endif;
        
         return $st;

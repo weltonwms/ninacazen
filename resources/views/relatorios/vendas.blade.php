@@ -15,9 +15,11 @@ Vendas'])
     <i class="fa fa-undo"></i>Limpar Form Pesquisa
 </button>
 
-{{-- <button class="btn btn-sm btn-outline-secondary mr-1 mb-1" type="button" data-type="link" target="_blank">
+<button class="btn btn-sm btn-outline-secondary mr-1 mb-1" 
+    type="button" data-route="{{route("relatorio.printVendas")}}" 
+    onclick="imprimirRelatorio(event)">
     <i class="fa fa-print"></i>Imprimir
-</button> --}}
+</button>
 @endtoolbar
 @endsection
 
@@ -95,3 +97,4 @@ use App\Helpers\UtilHelper;
 
 
 @endsection
+

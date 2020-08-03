@@ -56,6 +56,15 @@ class RelatorioRent extends Model
         return $this;
     }
 
+    public function getItemsPaginados($n=20){
+        $lista=collect();
+       for($i=0;$i<$this->items->count();$i=$i+$n){
+           $lista->push($this->items->slice($i,$n)->values());
+       }
+
+       return $lista;
+   }
+
     private function calcTotalGeral()
     {
         $total_rent=0;

@@ -100,3 +100,23 @@ function limparFormPesquisa(){
     $('#form_pesquisa select').trigger('change'); //avisar select2
 }
 
+function imprimirRelatorio(event){
+    var btn= event.currentTarget;
+    var action= btn.dataset.route;
+    
+     var oldAction= $("#form_pesquisa").attr("action");
+     var oldTarget= $("#form_pesquisa").attr("target");
+     $("#form_pesquisa").attr("action", action);
+     $("#form_pesquisa").attr("target","_blank");
+     $("#form_pesquisa").submit();
+     //desfazendo operação após submit
+     $("#form_pesquisa").attr("action", oldAction);
+     if(oldTarget){
+        $("#form_pesquisa").attr("target",oldTarget);
+     }
+     else{
+        $("#form_pesquisa").removeAttr("target");
+     }
+     
+ }
+

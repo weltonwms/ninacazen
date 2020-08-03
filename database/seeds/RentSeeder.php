@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class VendaSeeder extends Seeder
+class RentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,12 +11,12 @@ class VendaSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Venda::class, 21)->create()->each(function ($venda) {
+        factory(App\Rent::class, 20)->create()->each(function ($rent) {
             
             // Seed the relation with 5 purchases
             $produtos = factory(App\Produto::class, 2)->make();
             foreach($produtos as $produto):
-                $venda->produtos()->save($produto,['qtd'=>1,'valor_venda'=>$produto->valor_venda]);
+                $rent->produtos()->save($produto,['qtd'=>1,'valor_aluguel'=>$produto->valor_aluguel,'devolvido'=>0]);
             endforeach;
         });
     }
