@@ -187,12 +187,17 @@ TelaProduto=(function(){
     }
 
     function writeForEdit(){
+        $("#formProduto_id").val(index);
         $("#formProduto_produto_id").val(getProdutoId());
         $("#formProduto_qtd").val(qtd);
-        $("#formProduto_qtd_disponivel").val(getQtdDisponivelAtual());
+        //avisar o select2 da mudança. Isso empacta em
+        //Chamada implicita para write, através de onChangeProduto
+        //Por isso após esse gatilho tem que setar o valor e total de novo.
+        $('#formProduto_produto_id').trigger('change');
+        //$("#formProduto_qtd_disponivel").val(getQtdDisponivelAtual());
         $("#formProduto_valor_aluguel").val(valorFormatado(valor_aluguel));
-        $("#formProduto_id").val(index);
-        $('#formProduto_produto_id').trigger('change'); //avisar o select2 da mudança
+        calculoTotal();
+       
     }
 
     function resetFormProduto() {
